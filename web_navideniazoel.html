@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>FELIZ NAVIDAD</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+        color: white;
+        background: url('https://img1.picmix.com/output/stamp/normal/4/0/6/4/2134604_a202e.gif') no-repeat center center fixed;
+        background-size: cover;
+        overflow-x: hidden;
+    }
+    .overlay {
+        background: rgba(0, 0, 0, 0.25);
+        padding: 40px;
+        min-height: 100vh;
+        position: relative;
+    }
+    h1 {
+        font-size: 42px;
+        text-shadow: 0 0 10px #ff0000;
+    }
+    p {
+        font-size: 22px;
+        max-width: 700px;
+        margin: auto;
+        padding-bottom: 20px;
+        text-shadow: 0 0 8px #000;
+    }
+
+    /* Luces */
+    .lights {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .bulb {
+        width: 18px;
+        height: 28px;
+        border-radius: 50%;
+        animation: blink 1.2s infinite alternate;
+    }
+    .bulb:nth-child(1){ background:red; }
+    .bulb:nth-child(2){ background:yellow; animation-delay:0.2s; }
+    .bulb:nth-child(3){ background:lime; animation-delay:0.4s; }
+    .bulb:nth-child(4){ background:cyan; animation-delay:0.6s; }
+    .bulb:nth-child(5){ background:magenta; animation-delay:0.8s; }
+
+    @keyframes blink {
+        from { opacity: 0.3; }
+        to { opacity: 1; }
+    }
+
+    /* Nieve */
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 20px;
+        user-select: none;
+        animation: fall linear infinite;
+    }
+    @keyframes fall {
+        to { transform: translateY(110vh); opacity: 0; }
+    }
+
+    /* BOTÓN SORPRESA */
+    #btnSorpresa {
+        background: #ff0000;
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        color: white;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 25px;
+        box-shadow: 0 0 12px rgba(255,255,255,0.8);
+
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+
+        animation: buttonMove 1.8s infinite ease-in-out,
+                   glow 2.3s infinite ease-in-out;
+    }
+
+    @keyframes buttonMove {
+        0%   { transform: translateY(0) scale(1); }
+        30%  { transform: translateY(-6px) scale(1.07); }
+        60%  { transform: translateY(3px) scale(1.02); }
+        100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes glow {
+        0% { box-shadow: 0 0 8px rgba(255, 80, 80, 0.5); }
+        50% { box-shadow: 0 0 22px rgba(255, 20, 20, 1); }
+        100% { box-shadow: 0 0 8px rgba(255, 80, 80, 0.5); }
+    }
+
+    .emoji {
+        display: inline-block;
+        animation: emojiJump 1.4s infinite ease-in-out;
+    }
+
+    @keyframes emojiJump {
+        0%   { transform: translateY(0); }
+        40%  { transform: translateY(-8px); }
+        100% { transform: translateY(0); }
+    }
+
+    /* VIDEO */
+    #videoBox {
+        margin-top: 30px;
+        display: none;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    video {
+        width: 80%;
+        max-width: 700px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.6);
+    }
+
+    /* DESCARGA */
+    .downloadBtn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 12px 20px;
+        background: #00c853;
+        color: white;
+        font-size: 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 0 12px rgba(0,0,0,0.4);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .downloadBtn:hover {
+        background: #00e676;
+        transform: scale(1.05);
+    }
+
+    /* MÚSICA */
+    .musicBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255,0,0,0.8);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 22px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .musicBtn:hover {
+        transform: scale(1.15);
+    }
+</style>
+</head>
+<body>
+<div class="overlay">
+
+    <!-- Luces -->
+    <div class="lights">
+        <div class="bulb"></div><div class="bulb"></div><div class="bulb"></div><div class="bulb"></div><div class="bulb"></div>
+    </div>
+
+    <h1>Feliz Navidad, Zoel 🎄</h1>
+    <p>Gracias por ser mi mejor amiga, te aprecio con mi vida y espero duremos muchos años mas, te quiero mucho &lt;3.</p>
+
+    <button id="btnSorpresa" onclick="mostrarVideo()">
+        <span class="emoji">🎁</span> Destapa tu sorpresa
+    </button>
+    
+    <div id="videoBox">
+        <video controls src="memories zoel.mp4"></video>
+
+        <!-- BOTÓN DE DESCARGA FORZADA -->
+        <button class="downloadBtn" onclick="descargarVideo()">📥 Descargar video</button>
+    </div>
+</div>
+
+<!-- Música -->
+<audio id="bgMusic" src="Merry Christmas (Instrumental).mp3" loop></audio>
+<button class="musicBtn" onclick="toggleMusic()">🎵</button>
+
+<script>
+    const music = document.getElementById('bgMusic');
+    let playing = false;
+
+    function toggleMusic() {
+        const btn = document.querySelector(".musicBtn");
+        if (playing) {
+            music.pause();
+            playing = false;
+            btn.textContent = "🎵❌";
+        } else {
+            music.play();
+            playing = true;
+            btn.textContent = "🎵";
+        }
+    }
+
+    function mostrarVideo() {
+        const box = document.getElementById('videoBox');
+        box.style.display = 'block';
+        document.getElementById('btnSorpresa').style.display = 'none';
+    }
+
+    /* DESCARGA FORZADA */
+    function descargarVideo() {
+        const link = document.createElement('a');
+        link.href = "memories kisha.mp4";
+        link.download = "memories kisha.mp4";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Nieve animada
+    function crearNieve() {
+        const snow = document.createElement('div');
+        snow.classList.add('snowflake');
+        snow.innerHTML = '✦';
+        snow.style.left = Math.random() * 100 + 'vw';
+        snow.style.fontSize = (Math.random()*10+15)+'px';
+        snow.style.animationDuration = (Math.random()*5+5)+'s';
+        document.body.appendChild(snow);
+        setTimeout(() => snow.remove(), 10000);
+    }
+    setInterval(crearNieve, 200);
+</script>
+
+</body>
+</html>
